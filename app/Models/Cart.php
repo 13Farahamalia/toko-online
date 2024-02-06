@@ -5,29 +5,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Cart extends Model
 {
     use HasFactory;
 
-    /**
-     * Get the userItem that owns the Cart
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function userItem(): BelongsTo
+    public function cartPayments(): HasMany
     {
-        return $this->belongsTo(UserItem::class);
+        return $this->hasMany(CartPayment::class);
     }
 
-    /**
-     * Get the payment associated with the Cart
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function payment(): HasOne
+    public function user(): BelongsTo
     {
-        return $this->hasOne(Payment::class);
+        return $this->belongsTo(User::class);
+    }
+
+    public function item(): BelongsTo
+    {
+        return $this->belongsTo(Item::class);
     }
 }

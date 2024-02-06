@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_items', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('item_id')->constrained();
+            $table->text('address');
+            $table->char('telp', 13)->unique();
+            $table->string('proof');
+            $table->enum('status', ['Menunggu', 'Ditolak', 'Diterima'])->default('Menunggu');
+            $table->text('reason')->nullable();
             $table->timestamps();
         });
     }
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_items');
+        Schema::dropIfExists('payments');
     }
 };

@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payments', function (Blueprint $table) {
+        Schema::create('cart_payments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('cart_id')->constrained();
-            $table->text('address');
-            $table->char('telp', 13)->unique();
-            $table->string('proof');
-            $table->enum('status', ['Menunggu', 'Ditolak', 'Diterima'])->default('Menunggu');
+            $table->foreignId('payment_id')->constrained();
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('payments');
+        Schema::dropIfExists('cart_payments');
     }
 };

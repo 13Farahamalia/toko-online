@@ -43,15 +43,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
-
-    /**
-     * Get all of the userItems for the User
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function userItems(): HasMany
-    {
-        return $this->hasMany(UserItem::class, 'foreign_key', 'local_key');
-    }
 }

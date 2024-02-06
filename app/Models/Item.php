@@ -10,13 +10,8 @@ class Item extends Model
 {
     use HasFactory;
 
-    /**
-     * Get all of the userItems for the Item
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function userItems(): HasMany
+    public function carts(): HasMany
     {
-        return $this->hasMany(UserItem::class, 'foreign_key', 'local_key');
+        return $this->hasMany(Cart::class, 'foreign_key', 'local_key');
     }
 }
